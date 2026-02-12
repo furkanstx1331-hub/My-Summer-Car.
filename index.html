@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta name="google-site-verification" content="m8rQhzzER9ie0MqAOiL7zPJ3BfCRCY2ATFD1jnHI7c0" />
+    <meta charset="UTF-8">
+    <title>My Summer Car.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0004ff, #1c4bb1, #ffffff);
+            color: #f7e9e9;
+            line-height: 1.6;
+            animation: bgMove 10s ease infinite;
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            padding: 70px 20px;
+            text-align: center;
+            animation: fadeDown 1.2s ease;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            animation: fadeUp 1.2s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #ffdddd;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        li {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        li:hover {
+            background: #ffffff;
+            color: #0011ff;
+            transform: scale(1.05);
+        }
+
+        /* === DAHA FAZLA BUTONU === */
+        .toggleBtn {
+            background: none;
+            border: none;
+            color: #f8e0e0;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .toggleBtn:hover {
+            text-decoration: underline;
+        }
+
+        .extraText {
+            display: none;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #ffe3e3;
+        }
+
+        li:hover .toggleBtn {
+            color: #0004ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.4);
+        }
+
+        footer span {
+            opacity: 0.8;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>MAKER MINDS</h1>
+    <p>Teknofest Robolig Yarışma Takımı</p>
+</header>
+
+<section>
+
+    <div class="card">
+        <h2>Takım Hakkında</h2>
+        <details>
+            <summary><b>Hakkımızda</b></summary>
+            Maker Minds, Teknofest Robolig yarışması kapsamında; robotik, yazılım ve mühendislik alanlarında
+            yenilikçi, verimli ve sürdürülebilir çözümler geliştirmeyi amaçlayan bir teknoloji takımıdır.
+        </details>
+    </div>
+
+    <div class="card">
+        <h2>Hedeflerimiz</h2>
+        <ul>
+            
+                
+             <li><p class="extraText">Anroid ve IOS Platformlarında Başarı Elde Etmek.</p></li>
+             <li><p class="extraText">Otonom ve akıllı robot sistemleri geliştirmek</p></li>
+             <li><p class="extraText">Robotik ve yazılım alanında teknik yetkinliği artırmak</p></li> 
+             <li><p class="extraText">Yenilikçi ve sürdürülebilir çözümler üretmek</p></li>                                                                                  </li>
+                
+             
+
+            
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Vizyonumuz</h2>
+        <p>
+            Teknoloji üreten, araştıran ve geliştiren bireyler olarak; robotik ve yazılım alanlarında
+            yenilikçi çözümler ortaya koymayı amaçlıyoruz.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Olışturanlar</h2>
+        <ul>
+            <li>Muhammet Furkan Kılıç</li>
+            <li>Muhittin Manas Bayrakçı</li>
+         
+        </ul>
+     </div>
+
+</section>
+
+<footer>
+    © 2026 Tactical Games <br>
+    <span>Hazırlayan: Furkan Kılıç</span>
+</footer>
+
+<!-- === JAVASCRIPT === -->
+<script>
+    document.querySelectorAll(".toggleBtn").forEach(button => {
+        button.addEventListener("click", function () {
+            const text = this.nextElementSibling;
+
+            if (text.style.display === "block") {
+                text.style.display = "none";
+                this.textContent = "Daha Fazla";
+            } else {
+                text.style.display = "block";
+                this.textContent = "Daha Az";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+
