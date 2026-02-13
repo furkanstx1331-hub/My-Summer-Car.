@@ -1,140 +1,127 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta name="google-site-verification" content="m8rQhzzER9ie0MqAOiL7zPJ3BfCRCY2ATFD1jnHI7c0" />
-    <meta charset="UTF-8">
-    <title>TACTICAL GAMES.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TACTICAL GAMES</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0004ff, #1c4bb1, #ffffff);
-            color: #f7e9e9;
-            line-height: 1.6;
-            animation: bgMove 10s ease infinite;
-        }
-
-        @keyframes bgMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        header {
-            padding: 70px 20px;
-            text-align: center;
-            animation: fadeDown 1.2s ease;
-        }
-
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        header h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-        }
-
-        header p {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        section {
-            padding: 50px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .card {
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            animation: fadeUp 1.2s ease;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            text-align: center;
-            border-bottom: 2px solid #ffdddd;
-            padding-bottom: 10px;
-        }
-
-        ul {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
-
-        li {
-            background: rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        li:hover {
-            background: #ffffff;
-            color: #0011ff;
-            transform: scale(1.05);
-        }
-
-        /* === DAHA FAZLA BUTONU === */
-        .toggleBtn {
-            background: none;
-            border: none;
-            color: #f8e0e0;
-            font-size: 15px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .toggleBtn:hover {
-            text-decoration: underline;
-        }
-
-     .extraText {
-    display: block;   
-    margin-top: 8px;
-    font-size: 14px;
-    color: #ffe3e3;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,sans-serif;
 }
 
+body{
+    background: linear-gradient(-45deg,#0004ff,#1c4bb1,#000000,#ffffff);
+    background-size:400% 400%;
+    animation:gradientMove 12s ease infinite;
+    color:#f5f5f5;
+}
 
-        li:hover .toggleBtn {
-            color: #0004ff;
-        }
+/* ARKA PLAN ANİMASYONU */
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            font-size: 0.9rem;
-            background: rgba(0,0,0,0.4);
-        }
+/* HEADER */
+header{
+    text-align:center;
+    padding:80px 20px;
+    animation:fadeDown 1.2s ease;
+}
 
-        footer span {
-            opacity: 0.8;
-            font-size: 0.85rem;
-        }
-    </style>
+@keyframes fadeDown{
+    from{opacity:0;transform:translateY(-40px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+header h1{
+    font-size:3rem;
+    letter-spacing:3px;
+    text-shadow:0 0 20px rgba(255,255,255,0.6);
+}
+
+header p{
+    margin-top:15px;
+    font-size:1.2rem;
+    opacity:0.9;
+}
+
+/* SECTION */
+section{
+    max-width:1000px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+/* CARD TASARIM */
+.card{
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(8px);
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:40px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.6);
+    transition:0.4s;
+    animation:fadeUp 1.2s ease;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 50px rgba(0,0,0,0.8);
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(60px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    border-bottom:2px solid #ffffff;
+    padding-bottom:10px;
+}
+
+/* HEDEFLER ALT ALTA */
+.verticalList{
+    list-style:none;
+    display:block;
+}
+
+.verticalList li{
+    background:rgba(255,255,255,0.1);
+    margin-bottom:15px;
+    padding:15px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.verticalList li:hover{
+    background:white;
+    color:#0011ff;
+    transform:scale(1.05);
+}
+
+/* DETAILS */
+details summary{
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px;
+    background:rgba(0,0,0,0.5);
+    margin-top:40px;
+}
+</style>
 </head>
 
 <body>
@@ -146,105 +133,65 @@
 
 <section>
 
-    <div class="card">
-        <h2>Şirket Hakkında</h2>
-        <details>
-            <summary><b>Hakkımızda</b></summary>
-            Tactical Games, strateji, rekabet ve gerçekçi oyun deneyimini bir araya getirmeyi hedefleyen yenilikçi bir oyun geliştirme ekibidir.
-            Bizim için oyun yapmak sadece kod yazmak değildir; oyunculara unutamayacakları deneyimler yaşatmak, onları bir hikâyenin parçası haline getirmek ve rekabet duygusunu en üst seviyede hissettirmektir.
-            Ekibimiz; tasarım, yazılım ve yaratıcı fikirleri birleştirerek özgün projeler üretir. Detaylara önem veren yapımız sayesinde her mekanik,
-            her harita ve her karakter üzerinde titizlikle çalışırız.
-            Gerçekçi taktik sistemleri, dengeli rekabet ortamı ve sürükleyici atmosfer ile oyuncularımıza kaliteli bir deneyim sunmayı amaçlıyoruz.
-            Tactical Games olarak inancımız şudur: Bir oyun sadece oynanmaz, yaşanır. Bu yüzden projelerimizde stratejik düşünmeyi teşvik eden,
-            takım çalışmasını ön plana çıkaran ve oyuncuların kararlarının sonuçlarını hissettikleri sistemler geliştiriyoruz.
-        </details>
-    </div>
-
-    
- <div class="card">
-    <h2>Hedeflerimiz</h2>
-    <ul class="verticalList">
-        <li>Oyunlarımızda aktif ve güçlü bir oyuncu topluluğu oluşturmak.</li>
-        <li>Uluslararası platformlarda yayın yaparak global pazara açılmak.</li>
-        <li>Gelişmiş güvenlik sistemleri ile adil ve hilesiz bir oyun ortamı sağlamak.</li>
-        <li>Oyun içi grafik ve performans optimizasyonunda yüksek kalite oluşturmak.</li>
-    </ul>
+<div class="card">
+<h2>Şirket Hakkında</h2>
+<details>
+<summary>Hakkımızda</summary>
+<p>
+Tactical Games, strateji, rekabet ve gerçekçi oyun deneyimini bir araya getirmeyi hedefleyen yenilikçi bir oyun geliştirme ekibidir.
+Bizim için oyun yapmak sadece kod yazmak değildir; oyunculara unutamayacakları deneyimler yaşatmak,
+onları bir hikâyenin parçası haline getirmek ve rekabet duygusunu en üst seviyede hissettirmektir.
+Detaylara önem verir, özgün projeler üretir ve oyuncularımıza kaliteli bir deneyim sunmayı amaçlarız.
+</p>
+</details>
 </div>
 
+<div class="card">
+<h2>Hedeflerimiz</h2>
+<ul class="verticalList">
+<li>Oyunlarımızda aktif ve güçlü bir oyuncu topluluğu oluşturmak.</li>
+<li>Uluslararası platformlarda yayın yaparak global pazara açılmak.</li>
+<li>Gelişmiş güvenlik sistemleri ile adil ve hilesiz bir oyun ortamı sağlamak.</li>
+<li>Oyun içi grafik ve performans optimizasyonunda yüksek kalite oluşturmak.</li>
+<li>Strateji türünde yenilikçi projeler geliştirmek.</li>
+<li>E-spor alanında aktif rol almak.</li>
+<li>Genç geliştiricilere destek sağlamak.</li>
+</ul>
+</div>
 
-            
-        </ul>
-    </div>
+<div class="card">
+<h2>Vizyonumuz</h2>
+<p>
+Strateji ve taktik tabanlı oyun kategorisinde ulusal ve uluslararası düzeyde tanınan,
+yenilikçi ve güvenilir bir marka haline gelmek.
+Teknolojiyi yakından takip ederek oyunculara en üst seviyede deneyim sunmak ve sektöre yön veren bir ekip olmak.
+</p>
+</div>
 
-    <div class="card">
-        <h2>Vizyonumuz</h2>
-        <p>Tactical Games olarak vizyonumuz; strateji ve taktik tabanlı oyun kategorisinde ulusal ve uluslararası düzeyde tanınan,
-            yenilikçi ve güvenilir bir marka haline gelmektir.
-            Oyun dünyasında sadece takip eden değil, yön veren bir ekip olmayı hedefliyoruz.
-            Geliştirdiğimiz projelerin; teknik kalitesi, oynanış dengesi ve özgün tasarım anlayışı ile
-            örnek gösterilen yapımlar arasında yer almasını istiyoruz.
-            Teknolojiyi yakından takip ederek yapay zekâ sistemleri, 
-            gelişmiş fizik motorları ve gerçekçi simülasyon mekanikleri ile oyunculara en üst seviyede deneyim sunmayı amaçlıyoruz.
-            Uzun vadede hedefimiz, Tactical Games’i sadece bir oyun şirketi değil;
-            güçlü bir topluluk oluşturan, e-spor alanında aktif rol alan ve genç geliştiricilere ilham veren bir marka konumuna taşımaktır.
-            Bizim vizyonumuz; sınırları zorlayan,
-            kaliteyi standart haline getiren ve oyuncuların güvenle tercih ettiği bir oyun dünyası oluşturmaktır.
-        </p>
-    </div>
+<div class="card">
+<h2>Misyonumuz</h2>
+<p>
+Oyunculara adil, dengeli, rekabetçi ve eğlenceli oyun deneyimleri sunmak.
+Kaliteyi ön planda tutarak topluluk geri bildirimleriyle sürekli gelişen projeler üretmek.
+</p>
+</div>
 
-   
-       </ul>
-    </div>
-
-    <div class="card">
-        <h2>Misyonumuz</h2>
-        <p/>Misyonumuz; oyunculara adil, dengeli, rekabetçi ve eğlenceli oyun deneyimleri sunmaktır.
-            Her projede önceliğimiz kalite ve oyuncu memnuniyetidir. Oyunlarımızı geliştirirken performans optimizasyonuna,
-            adil eşleştirme sistemlerine ve hile karşıtı güvenlik önlemlerine büyük önem veririz.
-            Topluluk geri bildirimlerini dikkate alarak oyunlarımızı sürekli geliştirir, günceller ve iyileştiririz.
-            Çünkü biz oyuncularımızı sadece kullanıcı olarak değil, projemizin bir parçası olarak görürüz.
-            Misyonumuz ayrıca genç yetenekleri desteklemek, 
-            ekip ruhunu güçlendirmek ve oyun geliştirme alanında sürekli öğrenen bir yapı oluşturmaktır.
-            Tactical Games olarak amacımız; hem teknik açıdan güçlü hem de oyuncu açısından tatmin edici projeler üretmektir.
-        </p>
-    </div>
-    
-    
-    
-    
-    <div class="card">
-        <h2>Oluşturanlar</h2>
-        <ul>
-            <li>Muhammet Furkan Kılıç</li>
-            <li>Muhittin Manas Bayrakçı</li>
-         
-        </ul>
-     </div>
+<div class="card">
+<h2>Oluşturanlar</h2>
+<ul class="verticalList">
+<li>Muhammet Furkan Kılıç</li>
+<li>Muhittin Manas Bayrakçı</li>
+</ul>
+</div>
 
 </section>
 
 <footer>
-    © 2026 Tactical Games <br>
-    <span>Hazırlayan: Furkan Kılıç</span>
+© 2026 Tactical Games <br>
+Hazırlayan: Furkan Kılıç
 </footer>
-
-<!-- === JAVASCRIPT === -->
-<script>
-    document.querySelectorAll(".toggleBtn").forEach(button => {
-        button.addEventListener("click", function () {
-            const text = this.nextElementSibling;
-
-            if (text.style.display === "block") {
-                text.style.display = "none";
-                this.textContent = "Daha Fazla";
-            } else {
-                text.style.display = "block";
-                this.textContent = "Daha Az";
-            }
-        });
-    });
-</script>
 
 </body>
 </html>
+
 
