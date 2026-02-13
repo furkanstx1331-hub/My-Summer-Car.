@@ -13,10 +13,22 @@
     font-family:'Segoe UI',sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
+/* 🔥 SİYAH – LACİVERT ANİMASYONLU ARKA PLAN */
 body{
-    background:#0b0f1a;
+    background: linear-gradient(-45deg,#000000,#020c2b,#000814,#020c2b);
+    background-size:400% 400%;
+    animation:bgMove 14s ease infinite;
     color:#ffffff;
-    overflow-x:hidden;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 /* NAVBAR */
@@ -29,13 +41,13 @@ nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.7);
     backdrop-filter:blur(10px);
     z-index:1000;
 }
 
 nav h1{
-    font-size:1.5rem;
+    font-size:1.4rem;
     letter-spacing:2px;
     color:#00c3ff;
 }
@@ -46,12 +58,14 @@ nav ul{
     gap:30px;
 }
 
-nav ul li{
-    cursor:pointer;
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
     transition:0.3s;
 }
 
-nav ul li:hover{
+nav ul li a:hover{
     color:#00c3ff;
 }
 
@@ -63,71 +77,61 @@ nav ul li:hover{
     justify-content:center;
     align-items:center;
     text-align:center;
-    background: radial-gradient(circle at center,#001a2f,#000814);
 }
 
 .hero h2{
     font-size:4rem;
-    text-transform:uppercase;
-    letter-spacing:4px;
     color:#00c3ff;
-    text-shadow:0 0 25px rgba(0,195,255,0.8);
-    animation:fadeIn 1.5s ease;
+    letter-spacing:4px;
+    text-shadow:0 0 25px rgba(0,195,255,0.7);
 }
 
 .hero p{
     margin-top:20px;
-    font-size:1.3rem;
+    font-size:1.2rem;
     max-width:700px;
-    opacity:0.8;
-    animation:fadeIn 2s ease;
-}
-
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(40px);}
-    to{opacity:1;transform:translateY(0);}
+    opacity:0.85;
 }
 
 /* SECTION */
 section{
-    padding:100px 10%;
+    padding:120px 10% 60px;
 }
 
 /* CARD */
 .card{
-    background:#111827;
+    background:rgba(15,23,42,0.9);
     border-radius:20px;
-    padding:40px;
-    margin-bottom:40px;
-    box-shadow:0 0 40px rgba(0,195,255,0.1);
-    transition:0.4s;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 60px rgba(0,195,255,0.4);
+    padding:35px;
+    margin-bottom:35px;
+    box-shadow:0 0 40px rgba(0,195,255,0.15);
 }
 
 .card h3{
-    margin-bottom:20px;
-    font-size:1.8rem;
     color:#00c3ff;
+    margin-bottom:15px;
+    cursor:pointer;
 }
 
-.card p{
-    line-height:1.7;
-    opacity:0.9;
+/* KAPANIP AÇILAN İÇERİK */
+.content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.6s ease;
+}
+
+.card.active .content{
+    max-height:2000px;
 }
 
 /* HEDEFLER */
 .goal-list{
     list-style:none;
-    margin-top:20px;
 }
 
 .goal-list li{
     background:#1f2937;
-    margin-bottom:15px;
+    margin-bottom:12px;
     padding:15px;
     border-radius:10px;
     transition:0.3s;
@@ -135,26 +139,15 @@ section{
 
 .goal-list li:hover{
     background:#00c3ff;
-    color:#000;
-    transform:scale(1.03);
+    color:black;
 }
 
 /* FOOTER */
 footer{
     text-align:center;
-    padding:40px;
+    padding:30px;
     background:#000814;
     opacity:0.8;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-    .hero h2{
-        font-size:2.5rem;
-    }
-    nav ul{
-        display:none;
-    }
 }
 </style>
 </head>
@@ -164,71 +157,63 @@ footer{
 <nav>
     <h1>Tactical Games</h1>
     <ul>
-        <li>Hakkımızda</li>
-        <li>Hedefler</li>
-        <li>Vizyon</li>
-        <li>Misyon</li>
+        <li><a href="#about">Hakkımızda</a></li>
+        <li><a href="#goals">Hedefler</a></li>
+        <li><a href="#vision">Vizyon</a></li>
+        <li><a href="#mission">Misyon</a></li>
     </ul>
 </nav>
 
 <div class="hero">
-    <h2>Tactical Games</h2>
-    <p>Strateji, rekabet ve gerçekçi oyun deneyimini bir araya getiren yeni nesil oyun stüdyosu.</p>
+    <h2>TACTICAL GAMES</h2>
+    <p>Strateji, rekabet ve gerçekçi oyun deneyimini bir araya getiren yeni nesil oyun stüdyosu</p>
 </div>
 
 <section>
 
-<div class="card">
-<h3>Hakkımızda</h3>
+<div class="card" id="about">
+<h3 onclick="toggle(this)">Hakkımızda</h3>
+<div class="content">
 <p>
 Tactical Games, strateji ve taktik temelli oyunlar geliştiren yenilikçi bir oyun stüdyosudur.
 Amacımız sadece oyun üretmek değil; oyunculara unutulmaz deneyimler yaşatmaktır.
-Detaylara önem veren ekibimiz, özgün projeler ve güçlü sistemlerle sektörde fark yaratmayı hedeflemektedir.
 </p>
 </div>
+</div>
 
-<div class="card">
-<h3>Hedeflerimiz</h3>
+<div class="card" id="goals">
+<h3 onclick="toggle(this)">Hedeflerimiz</h3>
+<div class="content">
 <ul class="goal-list">
-<li>Güçlü ve aktif bir oyuncu topluluğu oluşturmak.</li>
-<li>Global pazarda yer almak.</li>
-<li>Adil ve hilesiz rekabet ortamı sağlamak.</li>
-<li>Yüksek grafik ve performans kalitesi sunmak.</li>
-<li>Strateji türünde yenilikçi projeler geliştirmek.</li>
-<li>E-spor alanında aktif rol almak.</li>
-<li>Genç geliştiricilere destek sağlamak.</li>
+<li>Güçlü ve aktif bir oyuncu topluluğu oluşturmak</li>
+<li>Global pazarda yer almak</li>
+<li>Adil ve hilesiz rekabet ortamı sağlamak</li>
+<li>Yüksek grafik ve performans kalitesi sunmak</li>
+<li>Strateji türünde yenilikçi projeler geliştirmek</li>
+<li>E-spor alanında aktif rol almak</li>
+<li>Genç geliştiricilere destek sağlamak</li>
 </ul>
 </div>
-
-<div class="card">
-<h3>Vizyonumuz</h3>
-<p>
-Tactical Games olarak vizyonumuz; strateji ve taktik temelli oyun kategorisinde yalnızca yerel pazarda değil, uluslararası arenada da
-tanınan, güven duyulan ve örnek gösterilen bir oyun markası haline gelmektir. 
-Amacımız; teknik kalite, özgün tasarım anlayışı ve oyuncu odaklı yaklaşımımız ile sektörde fark yaratan projeler üretmektir.
-Oyun dünyasının sürekli gelişen yapısına uyum sağlayarak; yapay zekâ sistemleri, gelişmiş fizik motorları, 
-gerçekçi simülasyon mekanikleri ve yüksek performans optimizasyonu ile geleceğin oyun deneyimini bugünden inşa etmeyi hedefliyoruz.
-Vizyonumuz yalnızca oyun üretmek değildir; güçlü bir oyuncu topluluğu oluşturmak, e-spor ekosistemine katkı sağlamak ve strateji türünde referans gösterilen yapımlar geliştirmektir.
-Tactical Games’in uzun vadeli hedefi; yenilikçi yaklaşımı, teknik altyapısı ve yaratıcı projeleri ile oyun sektöründe kalıcı bir iz bırakmaktır.
-Aynı zamanda genç geliştiricilere ilham veren, öğrenmeye ve gelişime açık bir şirket kültürü oluşturarak, sadece projeleriyle değil ekibiyle de örnek alınan bir marka olmayı amaçlıyoruz.
-Bizim vizyonumuz; kaliteyi standart haline getiren, sınırları zorlayan ve oyuncuların her zaman güvenle tercih ettiği bir oyun dünyası oluşturmaktır.
-</p>
 </div>
 
-<div class="card">
-<h3>Misyonumuz</h3>
+<div class="card" id="vision">
+<h3 onclick="toggle(this)">Vizyonumuz</h3>
+<div class="content">
 <p>
-Tactical Games’in misyonu; oyunculara adil, dengeli, rekabetçi ve sürükleyici oyun deneyimleri sunmaktır. 
-Her projede temel önceliğimiz; kalite, performans ve oyuncu memnuniyetidir.
-Oyunlarımızı geliştirirken yalnızca görsel kaliteye değil, oynanış mekaniklerinin derinliğine, taktiksel çeşitliliğe ve dengeli rekabet ortamına büyük önem veririz. 
-Oyuncuların verdikleri kararların sonuçlarını hissedebilecekleri sistemler geliştirerek gerçek strateji deneyimini yaşatmayı hedefleriz.
-Misyonumuz aynı zamanda güvenli ve adil bir oyun ortamı sağlamaktır. Hile karşıtı sistemler, 
-güçlü altyapı çözümleri ve dengeli eşleştirme mekanikleri ile herkes için eşit şartlarda rekabet imkânı sunmayı amaçlarız.
-Topluluk geri bildirimlerini dikkate alarak oyunlarımızı sürekli günceller, geliştirir ve iyileştiririz.
-Çünkü biz oyuncularımızı yalnızca kullanıcı olarak değil, projelerimizin bir parçası olarak görürüz.
-Tactical Games olarak misyonumuz; teknik açıdan güçlü, stratejik açıdan derin ve oyuncu açısından tatmin edici projeler üretmek,
-oyun dünyasında kalite ve güven kavramlarını temsil eden bir marka olmaktır.
+Strateji ve taktik tabanlı oyun kategorisinde uluslararası düzeyde tanınan,
+yenilikçi ve güvenilir bir marka olmak.
 </p>
+</div>
+</div>
+
+<div class="card" id="mission">
+<h3 onclick="toggle(this)">Misyonumuz</h3>
+<div class="content">
+<p>
+Oyunculara adil, dengeli ve yüksek kaliteli oyun deneyimleri sunmak.
+Topluluk geri bildirimleriyle sürekli gelişen projeler üretmek.
+</p>
+</div>
 </div>
 
 </section>
@@ -237,7 +222,15 @@ oyun dünyasında kalite ve güven kavramlarını temsil eden bir marka olmaktı
 © 2026 Tactical Games | All Rights Reserved
 </footer>
 
+<script>
+function toggle(title){
+    const card = title.parentElement;
+    card.classList.toggle("active");
+}
+</script>
+
 </body>
 </html>
+
 
 
