@@ -20,7 +20,7 @@ body{
     scroll-behavior:smooth;
 }
 
-/* LOADING */
+
 #loader{
     position:fixed;
     width:100%;
@@ -49,7 +49,7 @@ body{
     to{opacity:0;visibility:hidden;}
 }
 
-/* PARTICLES */
+
 canvas{
     position:fixed;
     top:0;
@@ -108,7 +108,7 @@ nav ul li:hover::after{
     width:100%;
 }
 
-/* HERO */
+
 .hero{
     position:relative;
     height:100vh;
@@ -150,12 +150,12 @@ nav ul li:hover::after{
     to{opacity:1;transform:translateY(0);}
 }
 
-/* SECTION */
+
 section{
     padding:120px 10%;
 }
 
-/* ULTRA CARD */
+
 .card{
     position:relative;
     background:rgba(15,23,42,0.75);
@@ -177,7 +177,7 @@ section{
     opacity:1;
 }
 
-/* Neon border animasyon */
+
 .card::before{
     content:"";
     position:absolute;
@@ -199,7 +199,7 @@ section{
     100%{background-position:200% 50%;}
 }
 
-/* Light sweep */
+
 .card::after{
     content:"";
     position:absolute;
@@ -221,7 +221,7 @@ section{
     text-shadow:0 0 20px #38bdf8;
 }
 
-/* FOUNDERS */
+
 .founders{
     display:flex;
     gap:40px;
@@ -243,7 +243,7 @@ section{
     box-shadow:0 0 25px #38bdf8;
 }
 
-/* LIST */
+
 .goal-list{
     list-style:none;
 }
@@ -268,7 +268,7 @@ footer{
     background:#020617;
 }
 
-/* MOBILE */
+
 @media(max-width:768px){
     nav ul{display:none;}
     .hero h2{font-size:2.5rem;}
@@ -361,7 +361,7 @@ function go(id){
     document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* Scroll Reveal */
+
 const cards=document.querySelectorAll('.card');
 window.addEventListener('scroll',()=>{
     document.querySelector('nav').classList.toggle('scrolled',window.scrollY>50);
@@ -372,7 +372,7 @@ window.addEventListener('scroll',()=>{
     });
 });
 
-/* 3D Tilt */
+
 document.querySelectorAll('.card').forEach(card=>{
     card.addEventListener('mousemove',e=>{
         const rect=card.getBoundingClientRect();
@@ -388,7 +388,7 @@ document.querySelectorAll('.card').forEach(card=>{
     });
 });
 
-/* Parallax */
+
 document.addEventListener("mousemove",e=>{
     const x=(window.innerWidth/2-e.pageX)/40;
     const y=(window.innerHeight/2-e.pageY)/40;
@@ -396,7 +396,7 @@ document.addEventListener("mousemove",e=>{
     `translate(${x}px,${y}px)`;
 });
 
-/* PARTICLES */
+
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
