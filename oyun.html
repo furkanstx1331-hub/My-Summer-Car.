@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Tactical Dodge</title>
+<style>
+body{
+    margin:0;
+    background:radial-gradient(circle,#1e1e1e,#0d0d0d);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial;
+    color:white;
+}
+
+#container{
+    display:flex;
+    gap:30px;
+}
+
+canvas{
+    background:#111;
+    border-radius:15px;
+    box-shadow:0 0 40px #00ffcc33;
+}
+
+#ui{
+    width:200px;
+}
+
+h1{margin:0;}
+button{
+    padding:10px;
+    width:100%;
+    background:#00ffcc;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:8px;
+}
+button:hover{background:#00ddaa;}
+</style>
+</head>
+<body>
+
+<div id="container">
+    <canvas id="game" width="500" height="500"></canvas>
+    <div id="ui">
+        <h2>SKOR</h2>
+        <h1 id="score">0</h1>
+        <br>
+        <button onclick="init()">Yeniden Başlat</button>
+    </div>
+</div>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const grid = 5;
+const size = canvas.width / grid;
+
+let player, gold, enemies, score, speed, moveTimer;
+
+function init(){
+    player = {x:2,y:2};
+    enemies = [];
+    score = 0;
+    speed = 1000;
+    document.getElementById("score").innerText = score;
+    spawnGold();
+    clearInterval(moveTimer);
+    moveTimer = setInterval(moveEnemies, speed);
+    setInterval(spawnEnemy, 2500);
+    draw();
+}
+
+function spawnGold(){
+    gold = {
+        x:Math.floor(Math.random()*grid),
+        y:Math.floor(Math.random()*grid),
+        glow:0
+    };
+}
+
+function spawnEnemy(){
+    const edge = Math.floor(Math.random()*4);
+    let x,y;
+    if(edge===0){x=0;y=Math.floor(Math.random()*grid);}
+    if(edge===1){x=grid-1;y=Math.floor(Math.random()*grid);}
+    if(edge===2){y=0;x=Math.floor(Math.random()*grid);}
+    if(edge===3){y=grid-1;x=Math.floor(Math.random()*grid);}
+
+    enemies.push({x,y,dx:0,dy:0});
+}
+
+function chooseDirection(enemy){
+    const dirs = [
+        {dx:1,dy:0},
+        {dx:-1,dy:0},
+        {dx:0,dy:1},
+        {dx:0,dy:-1}
+    ];
+    const d = dirs[Math.floor(Math.random()*4)];
+    enemy.dx = d.dx;
+    enemy.dy = d.dy;
+}
+
+function moveEnemies(){
+    enemies.forEach(enemy=>{
+        chooseDirection(enemy);
+        let nx = enemy.x + enemy.dx;
+        let ny = enemy.y + enemy.dy;
+        if(nx>=0 && nx<grid) enemy.x = nx;
+        if(ny>=0 && ny<grid) enemy.y = ny;
+    });
+    checkCollision();
+    draw();
+}
+
+function checkCollision(){
+    enemies.forEach(e=>{
+        if(e.x===player.x && e.y===player.y){
+            alert("GAME OVER\nSkor: "+score);
+            init();
+        }
+    });
+}
+
+document.addEventListener("keydown",e=>{
+    if(e.key==="w"||e.key==="ArrowUp"){ if(player.y>0) player.y--; }
+    if(e.key==="s"||e.key==="ArrowDown"){ if(player.y<grid-1) player.y++; }
+    if(e.key==="a"||e.key==="ArrowLeft"){ if(player.x>0) player.x--; }
+    if(e.key==="d"||e.key==="ArrowRight"){ if(player.x<grid-1) player.x++; }
+
+    if(player.x===gold.x && player.y===gold.y){
+        score++;
+        document.getElementById("score").innerText = score;
+        spawnGold();
+        if(speed>300){
+            speed-=80;
+            clearInterval(moveTimer);
+            moveTimer = setInterval(moveEnemies, speed);
+        }
+    }
+
+    checkCollision();
+    draw();
+});
+
+function drawGrid(){
+    for(let i=0;i<grid;i++){
+        for(let j=0;j<grid;j++){
+            ctx.strokeStyle="#222";
+            ctx.strokeRect(i*size,j*size,size,size);
+        }
+    }
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    drawGrid();
+
+    // Gold glow
+    ctx.save();
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "gold";
+    ctx.fillStyle="gold";
+    ctx.beginPath();
+    ctx.arc(gold.x*size+size/2,gold.y*size+size/2,size/4,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+
+    // Player glow
+    ctx.save();
+    ctx.shadowBlur=25;
+    ctx.shadowColor="#00ffcc";
+    ctx.fillStyle="#00ffcc";
+    ctx.fillRect(player.x*size+12,player.y*size+12,size-24,size-24);
+    ctx.restore();
+
+    // Enemies
+    enemies.forEach(enemy=>{
+        ctx.fillStyle="red";
+        ctx.fillRect(enemy.x*size+12,enemy.y*size+12,size-24,size-24);
+
+        // yön oku
+        ctx.fillStyle="white";
+        ctx.font="20px Arial";
+        let arrow="";
+        if(enemy.dx===1) arrow="→";
+        if(enemy.dx===-1) arrow="←";
+        if(enemy.dy===1) arrow="↓";
+        if(enemy.dy===-1) arrow="↑";
+        ctx.fillText(arrow,enemy.x*size+size/2-7,enemy.y*size+size/2+7);
+    });
+}
+
+init();
+</script>
+
+</body>
+</html>
