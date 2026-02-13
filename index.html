@@ -13,19 +13,15 @@
     font-family:'Segoe UI',sans-serif;
 }
 
-html{
+body{
+    background: linear-gradient(-45deg,#020617,#020024,#020b2e,#000814);
+    background-size:400% 400%;
+    animation:bgFlow 15s ease infinite;
+    color:#ffffff;
     scroll-behavior:smooth;
 }
 
-/* 🔥 SİYAH – LACİVERT ANİMASYONLU ARKA PLAN */
-body{
-    background: linear-gradient(-45deg,#000000,#020c2b,#000814,#020c2b);
-    background-size:400% 400%;
-    animation:bgMove 14s ease infinite;
-    color:#ffffff;
-}
-
-@keyframes bgMove{
+@keyframes bgFlow{
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
@@ -34,22 +30,20 @@ body{
 /* NAVBAR */
 nav{
     position:fixed;
-    width:100%;
     top:0;
-    left:0;
+    width:100%;
     padding:20px 8%;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(0,0,0,0.7);
-    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,0.65);
+    backdrop-filter:blur(12px);
     z-index:1000;
 }
 
 nav h1{
-    font-size:1.4rem;
+    color:#38bdf8;
     letter-spacing:2px;
-    color:#00c3ff;
 }
 
 nav ul{
@@ -58,15 +52,13 @@ nav ul{
     gap:30px;
 }
 
-nav ul li a{
-    color:white;
-    text-decoration:none;
-    font-weight:500;
-    transition:0.3s;
+nav ul li{
+    cursor:pointer;
+    transition:.3s;
 }
 
-nav ul li a:hover{
-    color:#00c3ff;
+nav ul li:hover{
+    color:#38bdf8;
 }
 
 /* HERO */
@@ -81,73 +73,80 @@ nav ul li a:hover{
 
 .hero h2{
     font-size:4rem;
-    color:#00c3ff;
     letter-spacing:4px;
-    text-shadow:0 0 25px rgba(0,195,255,0.7);
+    color:#38bdf8;
+    text-shadow:0 0 25px rgba(56,189,248,0.8);
 }
 
 .hero p{
     margin-top:20px;
-    font-size:1.2rem;
     max-width:700px;
-    opacity:0.85;
+    opacity:.85;
 }
 
 /* SECTION */
 section{
-    padding:120px 10% 60px;
+    padding:120px 10%;
 }
 
 /* CARD */
 .card{
     background:rgba(15,23,42,0.9);
     border-radius:20px;
-    padding:35px;
-    margin-bottom:35px;
-    box-shadow:0 0 40px rgba(0,195,255,0.15);
+    padding:40px;
+    margin-bottom:40px;
+    box-shadow:0 0 40px rgba(56,189,248,0.15);
+    transform:translateY(40px);
+    opacity:0;
+    transition:.8s;
+}
+
+.card.show{
+    transform:translateY(0);
+    opacity:1;
 }
 
 .card h3{
-    color:#00c3ff;
-    margin-bottom:15px;
-    cursor:pointer;
+    color:#38bdf8;
+    margin-bottom:20px;
 }
 
-/* KAPANIP AÇILAN İÇERİK */
-.content{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height 0.6s ease;
+.card p{
+    line-height:1.7;
+    opacity:.9;
 }
 
-.card.active .content{
-    max-height:2000px;
-}
-
-/* HEDEFLER */
+/* LIST */
 .goal-list{
     list-style:none;
 }
 
 .goal-list li{
-    background:#1f2937;
-    margin-bottom:12px;
+    background:#020617;
     padding:15px;
+    margin-bottom:12px;
     border-radius:10px;
-    transition:0.3s;
+    transition:.3s;
 }
 
 .goal-list li:hover{
-    background:#00c3ff;
-    color:black;
+    background:#38bdf8;
+    color:#000;
+    transform:scale(1.03);
 }
 
 /* FOOTER */
 footer{
     text-align:center;
-    padding:30px;
-    background:#000814;
-    opacity:0.8;
+    padding:40px;
+    background:#020617;
+    opacity:.8;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    nav ul{display:none;}
+    .hero h2{font-size:2.5rem;}
 }
 </style>
 </head>
@@ -157,63 +156,57 @@ footer{
 <nav>
     <h1>Tactical Games</h1>
     <ul>
-        <li><a href="#about">Hakkımızda</a></li>
-        <li><a href="#goals">Hedefler</a></li>
-        <li><a href="#vision">Vizyon</a></li>
-        <li><a href="#mission">Misyon</a></li>
+        <li onclick="go('about')">Hakkımızda</li>
+        <li onclick="go('goals')">Hedefler</li>
+        <li onclick="go('vision')">Vizyon</li>
+        <li onclick="go('mission')">Misyon</li>
     </ul>
 </nav>
 
 <div class="hero">
     <h2>TACTICAL GAMES</h2>
-    <p>Strateji, rekabet ve gerçekçi oyun deneyimini bir araya getiren yeni nesil oyun stüdyosu</p>
+    <p>Strateji, rekabet ve gerçekçi oyun deneyimini bir araya getiren yeni nesil oyun stüdyosu.</p>
 </div>
 
 <section>
 
 <div class="card" id="about">
-<h3 onclick="toggle(this)">Hakkımızda</h3>
-<div class="content">
+<h3>Hakkımızda</h3>
 <p>
-Tactical Games, strateji ve taktik temelli oyunlar geliştiren yenilikçi bir oyun stüdyosudur.
-Amacımız sadece oyun üretmek değil; oyunculara unutulmaz deneyimler yaşatmaktır.
+Tactical Games; strateji ve taktik temelli oyunlar geliştiren, yenilikçi ve vizyoner bir oyun stüdyosudur.
+Amacımız yalnızca oyun üretmek değil, oyunculara gerçek anlamda yaşanan deneyimler sunmaktır.
 </p>
-</div>
 </div>
 
 <div class="card" id="goals">
-<h3 onclick="toggle(this)">Hedeflerimiz</h3>
-<div class="content">
+<h3>Hedeflerimiz</h3>
 <ul class="goal-list">
 <li>Güçlü ve aktif bir oyuncu topluluğu oluşturmak</li>
-<li>Global pazarda yer almak</li>
+<li>Global oyun pazarında yer almak</li>
 <li>Adil ve hilesiz rekabet ortamı sağlamak</li>
-<li>Yüksek grafik ve performans kalitesi sunmak</li>
+<li>Yüksek performans ve grafik kalitesi sunmak</li>
 <li>Strateji türünde yenilikçi projeler geliştirmek</li>
 <li>E-spor alanında aktif rol almak</li>
 <li>Genç geliştiricilere destek sağlamak</li>
 </ul>
 </div>
-</div>
 
 <div class="card" id="vision">
-<h3 onclick="toggle(this)">Vizyonumuz</h3>
-<div class="content">
+<h3>Vizyonumuz</h3>
 <p>
-Strateji ve taktik tabanlı oyun kategorisinde uluslararası düzeyde tanınan,
-yenilikçi ve güvenilir bir marka olmak.
+Strateji ve taktik tabanlı oyunlarda uluslararası düzeyde tanınan,
+güvenilir ve yenilikçi bir marka olmak.
+Teknolojiyi yakından takip ederek oyun sektörüne yön veren projeler üretmek.
 </p>
-</div>
 </div>
 
 <div class="card" id="mission">
-<h3 onclick="toggle(this)">Misyonumuz</h3>
-<div class="content">
+<h3>Misyonumuz</h3>
 <p>
-Oyunculara adil, dengeli ve yüksek kaliteli oyun deneyimleri sunmak.
-Topluluk geri bildirimleriyle sürekli gelişen projeler üretmek.
+Oyunculara adil, dengeli ve rekabetçi oyun deneyimleri sunmak.
+Topluluk geri bildirimleriyle sürekli gelişen,
+kaliteyi standart haline getiren projeler üretmek.
 </p>
-</div>
 </div>
 
 </section>
@@ -223,14 +216,24 @@ Topluluk geri bildirimleriyle sürekli gelişen projeler üretmek.
 </footer>
 
 <script>
-function toggle(title){
-    const card = title.parentElement;
-    card.classList.toggle("active");
+function go(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
+
+const cards=document.querySelectorAll('.card');
+window.addEventListener('scroll',()=>{
+    cards.forEach(card=>{
+        const top=card.getBoundingClientRect().top;
+        if(top<window.innerHeight-100){
+            card.classList.add('show');
+        }
+    });
+});
 </script>
 
 </body>
 </html>
+
 
 
 
