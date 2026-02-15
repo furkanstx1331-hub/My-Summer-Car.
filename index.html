@@ -20,7 +20,80 @@ body{
     scroll-behavior:smooth;
 }
 
+/* ===== PREMIUM NAVBAR ===== */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:20px 8%;
+    backdrop-filter:blur(20px);
+    background:rgba(2,6,23,0.6);
+    border-bottom:1px solid rgba(56,189,248,0.15);
+    z-index:1000;
+    transition:all .4s ease;
+}
 
+.navbar.scrolled{
+    padding:14px 8%;
+    background:rgba(2,6,23,0.9);
+}
+
+.nav-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    color:#38bdf8;
+}
+
+.logo img{
+    width:42px;
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:35px;
+}
+
+.nav-links li{
+    position:relative;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.nav-links li a{
+    color:white;
+    text-decoration:none;
+}
+
+.nav-links li::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:#38bdf8;
+    transition:.4s;
+}
+
+.nav-links li:hover::after{
+    width:100%;
+}
+
+.nav-links li:hover{
+    color:#38bdf8;
+}
+
+/* LOADER */
 #loader{
     position:fixed;
     width:100%;
@@ -49,7 +122,6 @@ body{
     to{opacity:0;visibility:hidden;}
 }
 
-
 canvas{
     position:fixed;
     top:0;
@@ -57,59 +129,9 @@ canvas{
     z-index:-1;
 }
 
-/* NAVBAR */
-nav{
-    position:fixed;
-    width:100%;
-    top:0;
-    padding:20px 8%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,0.5);
-    backdrop-filter:blur(15px);
-    z-index:1000;
-    transition:.4s;
-}
-
-nav.scrolled{
-    background:rgba(0,0,0,0.85);
-}
-
-nav h1{
-    color:#38bdf8;
-    text-shadow:0 0 20px #38bdf8;
-}
-
-nav ul{
-    list-style:none;
-    display:flex;
-    gap:30px;
-}
-
-nav ul li{
-    cursor:pointer;
-    position:relative;
-    transition:.3s;
-}
-
-nav ul li::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-5px;
-    width:0%;
-    height:2px;
-    background:#38bdf8;
-    transition:.4s;
-}
-
-nav ul li:hover::after{
-    width:100%;
-}
-
-
+/* HERO */
 .hero{
+    margin-top:110px;
     position:relative;
     height:100vh;
     display:flex;
@@ -136,26 +158,19 @@ nav ul li:hover::after{
     font-size:4rem;
     color:#38bdf8;
     text-shadow:0 0 40px #38bdf8;
-    animation:fadeUp 2s ease forwards;
 }
 
 .hero p{
     margin-top:20px;
     opacity:.85;
-    animation:fadeUp 2.5s ease forwards;
 }
 
-@keyframes fadeUp{
-    from{opacity:0;transform:translateY(40px);}
-    to{opacity:1;transform:translateY(0);}
-}
-
-
+/* SECTIONS */
 section{
     padding:120px 10%;
 }
 
-
+/* CARDS */
 .card{
     position:relative;
     background:rgba(15,23,42,0.75);
@@ -176,7 +191,6 @@ section{
     transform:translateY(0) scale(1);
     opacity:1;
 }
-
 
 .card::before{
     content:"";
@@ -199,7 +213,6 @@ section{
     100%{background-position:200% 50%;}
 }
 
-
 .card::after{
     content:"";
     position:absolute;
@@ -220,7 +233,6 @@ section{
     margin-bottom:20px;
     text-shadow:0 0 20px #38bdf8;
 }
-
 
 .founders{
     display:flex;
@@ -243,7 +255,6 @@ section{
     box-shadow:0 0 25px #38bdf8;
 }
 
-
 .goal-list{
     list-style:none;
 }
@@ -261,16 +272,14 @@ section{
     color:#000;
 }
 
-/* FOOTER */
 footer{
     text-align:center;
     padding:40px;
     background:#020617;
 }
 
-
 @media(max-width:768px){
-    nav ul{display:none;}
+    .nav-links{display:none;}
     .hero h2{font-size:2.5rem;}
 }
 </style>
@@ -285,17 +294,22 @@ footer{
 
 <canvas id="particles"></canvas>
 
-<nav>
-    <h1>Tactical Games</h1>
-    <ul>
-        <li onclick="go('founders')">Oluşturanlar</li>
-        <li onclick="go('about')">Hakkımızda</li>
-        <li onclick="go('goals')">Hedefler</li>
-        <li onclick="go('vision')">Vizyon</li>
-        <li onclick="go('mission')">Misyon</li>
-        <li><a href="oyun.html" style="color:white;text-decoration:none;">Tactical Dodge </a></li>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <img src="logo.png" alt="Tactical Games Logo">
+            <span>Tactical Games</span>
+        </div>
 
-    </ul>
+        <ul class="nav-links">
+            <li onclick="go('founders')">Oluşturanlar</li>
+            <li onclick="go('about')">Hakkımızda</li>
+            <li onclick="go('goals')">Hedefler</li>
+            <li onclick="go('vision')">Vizyon</li>
+            <li onclick="go('mission')">Misyon</li>
+            <li><a href="oyun.html">Tactical Dodge</a></li>
+        </ul>
+    </div>
 </nav>
 
 <div class="hero">
@@ -363,17 +377,18 @@ function go(id){
     document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-
 const cards=document.querySelectorAll('.card');
+
 window.addEventListener('scroll',()=>{
-    document.querySelector('nav').classList.toggle('scrolled',window.scrollY>50);
+    document.querySelector('.navbar')
+    .classList.toggle('scrolled',window.scrollY>50);
+
     cards.forEach((card,i)=>{
         if(card.getBoundingClientRect().top<window.innerHeight-100){
             setTimeout(()=>card.classList.add('show'),i*150);
         }
     });
 });
-
 
 document.querySelectorAll('.card').forEach(card=>{
     card.addEventListener('mousemove',e=>{
@@ -390,14 +405,12 @@ document.querySelectorAll('.card').forEach(card=>{
     });
 });
 
-
 document.addEventListener("mousemove",e=>{
     const x=(window.innerWidth/2-e.pageX)/40;
     const y=(window.innerHeight/2-e.pageY)/40;
     document.getElementById("parallax").style.transform=
     `translate(${x}px,${y}px)`;
 });
-
 
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
@@ -440,7 +453,6 @@ setInterval(draw,33);
 
 </body>
 </html>
-
 
 
 
