@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tactical Dodge</title>
+<title>Tactical Dodge ULTRA</title>
 
 <style>
 body{
     margin:0;
-    background:radial-gradient(circle,#1e1e1e,#0d0d0d);
+    background:radial-gradient(circle at center,#0f2027,#0a0a0a);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -16,143 +16,117 @@ body{
     height:100vh;
     font-family:Arial;
     color:white;
-}
-
-#container{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:15px;
+    overflow:hidden;
 }
 
 canvas{
-    background:#111;
-    border-radius:15px;
-    box-shadow:0 0 40px #00ffcc33;
+    border-radius:20px;
+    box-shadow:0 0 60px #00ffcc55;
+    background:linear-gradient(135deg,#0f0f0f,#111);
     max-width:95vw;
 }
 
 #ui{
     text-align:center;
+    margin-top:10px;
 }
 
 button{
     padding:8px;
-    margin:5px;
+    margin:4px;
     background:#00ffcc;
     border:none;
     cursor:pointer;
     font-weight:bold;
-    border-radius:8px;
+    border-radius:10px;
 }
 button:hover{background:#00ddaa;}
 
 #controls{
     margin-top:10px;
     display:grid;
-    grid-template-columns:60px 60px 60px;
+    grid-template-columns:70px 70px 70px;
     gap:10px;
     justify-content:center;
 }
 .control-btn{
-    background:#333;
+    background:#222;
     color:white;
-    font-size:20px;
-    border-radius:10px;
+    font-size:22px;
+    border-radius:12px;
 }
 </style>
 </head>
 <body>
 
-<div id="container">
-    <canvas id="game" width="400" height="400"></canvas>
+<canvas id="game" width="420" height="420"></canvas>
 
-    <div id="ui">
-        <h3>SKOR: <span id="score">0</span></h3>
-        <h3>CAN: ❤️ <span id="lives">3</span></h3>
+<div id="ui">
+    <h3>SKOR: <span id="score">0</span> | ❤️ <span id="lives">3</span></h3>
 
-        <div>
-            <button onclick="setMode('easy')">🟢 Easy</button>
-            <button onclick="setMode('normal')">🟡 Normal</button>
-            <button onclick="setMode('hard')">🔴 Hard</button>
-        </div>
+    <button onclick="setMode('easy')">🟢 Easy</button>
+    <button onclick="setMode('normal')">🟡 Normal</button>
+    <button onclick="setMode('hard')">🔴 Hard</button>
+    <button onclick="init()">Yeniden Başlat</button>
+</div>
 
-        <button onclick="init()">Yeniden Başlat</button>
-    </div>
-
-   
-    <div id="controls">
-        <div></div>
-        <button class="control-btn" onclick="move('up')">⬆</button>
-        <div></div>
-
-        <button class="control-btn" onclick="move('left')">⬅</button>
-        <div></div>
-        <button class="control-btn" onclick="move('right')">➡</button>
-
-        <div></div>
-        <button class="control-btn" onclick="move('down')">⬇</button>
-        <div></div>
-    </div>
+<div id="controls">
+    <div></div>
+    <button class="control-btn" onclick="move('up')">⬆</button>
+    <div></div>
+    <button class="control-btn" onclick="move('left')">⬅</button>
+    <div></div>
+    <button class="control-btn" onclick="move('right')">➡</button>
+    <div></div>
+    <button class="control-btn" onclick="move('down')">⬇</button>
+    <div></div>
 </div>
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-let grid = 6;
+let grid = 7;
 let size = canvas.width / grid;
 
 let player, gold, enemies, score, speed, moveTimer, enemySpawner, lives;
-let mode = "easy";
+let mode="easy";
 
-function setMode(selected){
-    mode = selected;
-    init();
-}
+function setMode(m){ mode=m; init(); }
 
 function init(){
 
-    if(mode==="easy"){
-        speed = 1500;
-        lives = 3;
-    }
-    if(mode==="normal"){
-        speed = 1000;
-        lives = 2;
-    }
-    if(mode==="hard"){
-        speed = 700;
-        lives = 1;
-    }
+    if(mode==="easy"){ speed=1400; lives=3; }
+    if(mode==="normal"){ speed=900; lives=2; }
+    if(mode==="hard"){ speed=600; lives=1; }
 
-    player = {x:3,y:3};
-    enemies = [];
-    score = 0;
+    player={x:3,y:3};
+    enemies=[];
+    score=0;
 
-    document.getElementById("score").innerText = score;
-    document.getElementById("lives").innerText = lives;
+    document.getElementById("score").innerText=score;
+    document.getElementById("lives").innerText=lives;
 
     spawnGold();
 
     clearInterval(moveTimer);
     clearInterval(enemySpawner);
 
-    moveTimer = setInterval(moveEnemies, speed);
-    enemySpawner = setInterval(spawnEnemy, 3500);
+    moveTimer=setInterval(moveEnemies,speed);
+    enemySpawner=setInterval(spawnEnemy,3000);
 
     draw();
 }
 
 function spawnGold(){
-    gold = {
+    gold={
         x:Math.floor(Math.random()*grid),
         y:Math.floor(Math.random()*grid)
     };
 }
 
 function spawnEnemy(){
-    const edge = Math.floor(Math.random()*4);
+    const edge=Math.floor(Math.random()*4);
     let x,y;
 
     if(edge===0){x=0;y=Math.floor(Math.random()*grid);}
@@ -162,35 +136,50 @@ function spawnEnemy(){
 
     if(x===player.x && y===player.y) return;
 
-    enemies.push({x,y});
+    enemies.push({x,y,nextX:x,nextY:y});
+}
+
+function chooseDirection(enemy){
+    const dirs=[
+        {dx:1,dy:0},
+        {dx:-1,dy:0},
+        {dx:0,dy:1},
+        {dx:0,dy:-1}
+    ];
+    const d=dirs[Math.floor(Math.random()*4)];
+
+    let nx=enemy.x+d.dx;
+    let ny=enemy.y+d.dy;
+
+    if(nx>=0 && nx<grid) enemy.nextX=nx;
+    else enemy.nextX=enemy.x;
+
+    if(ny>=0 && ny<grid) enemy.nextY=ny;
+    else enemy.nextY=enemy.y;
 }
 
 function moveEnemies(){
-    enemies.forEach(enemy=>{
-        const dirs = [
-            {dx:1,dy:0},
-            {dx:-1,dy:0},
-            {dx:0,dy:1},
-            {dx:0,dy:-1}
-        ];
-        const d = dirs[Math.floor(Math.random()*4)];
-        let nx = enemy.x + d.dx;
-        let ny = enemy.y + d.dy;
-
-        if(nx>=0 && nx<grid) enemy.x = nx;
-        if(ny>=0 && ny<grid) enemy.y = ny;
+    enemies.forEach(e=>{
+        chooseDirection(e);
     });
 
-    checkCollision();
-    draw();
+    draw(); // önce yönü göster
+
+    setTimeout(()=>{
+        enemies.forEach(e=>{
+            e.x=e.nextX;
+            e.y=e.nextY;
+        });
+        checkCollision();
+        draw();
+    },300);
 }
 
 function checkCollision(){
     enemies.forEach(e=>{
         if(e.x===player.x && e.y===player.y){
             lives--;
-            document.getElementById("lives").innerText = lives;
-
+            document.getElementById("lives").innerText=lives;
             if(lives<=0){
                 alert("GAME OVER\nSkor: "+score);
                 init();
@@ -199,22 +188,21 @@ function checkCollision(){
     });
 }
 
-function move(direction){
-
-    if(direction==="up" && player.y>0) player.y--;
-    if(direction==="down" && player.y<grid-1) player.y++;
-    if(direction==="left" && player.x>0) player.x--;
-    if(direction==="right" && player.x<grid-1) player.x++;
+function move(dir){
+    if(dir==="up"&&player.y>0) player.y--;
+    if(dir==="down"&&player.y<grid-1) player.y++;
+    if(dir==="left"&&player.x>0) player.x--;
+    if(dir==="right"&&player.x<grid-1) player.x++;
 
     if(player.x===gold.x && player.y===gold.y){
         score++;
-        document.getElementById("score").innerText = score;
+        document.getElementById("score").innerText=score;
         spawnGold();
 
-        if(speed>500){
+        if(speed>450){
             speed-=50;
             clearInterval(moveTimer);
-            moveTimer = setInterval(moveEnemies, speed);
+            moveTimer=setInterval(moveEnemies,speed);
         }
     }
 
@@ -243,19 +231,48 @@ function draw(){
 
     drawGrid();
 
+    // GOLD
+    ctx.save();
+    ctx.shadowBlur=25;
+    ctx.shadowColor="gold";
     ctx.fillStyle="gold";
     ctx.beginPath();
     ctx.arc(gold.x*size+size/2,gold.y*size+size/2,size/4,0,Math.PI*2);
     ctx.fill();
+    ctx.restore();
 
-
+    // PLAYER
+    ctx.save();
+    ctx.shadowBlur=30;
+    ctx.shadowColor="#00ffcc";
     ctx.fillStyle="#00ffcc";
-    ctx.fillRect(player.x*size+10,player.y*size+10,size-20,size-20);
+    ctx.fillRect(player.x*size+8,player.y*size+8,size-16,size-16);
+    ctx.restore();
 
-   
-    enemies.forEach(enemy=>{
+    // ENEMIES
+    enemies.forEach(e=>{
+
+        // hedef kareyi göster
+        ctx.fillStyle="rgba(255,0,0,0.2)";
+        ctx.fillRect(e.nextX*size,e.nextY*size,size,size);
+
+        // düşman glow
+        ctx.save();
+        ctx.shadowBlur=25;
+        ctx.shadowColor="red";
         ctx.fillStyle="red";
-        ctx.fillRect(enemy.x*size+10,enemy.y*size+10,size-20,size-20);
+        ctx.fillRect(e.x*size+8,e.y*size+8,size-16,size-16);
+        ctx.restore();
+
+        // yön oku
+        ctx.fillStyle="white";
+        ctx.font="18px Arial";
+        let arrow="";
+        if(e.nextX>e.x) arrow="→";
+        if(e.nextX<e.x) arrow="←";
+        if(e.nextY>e.y) arrow="↓";
+        if(e.nextY<e.y) arrow="↑";
+        ctx.fillText(arrow,e.x*size+size/2-6,e.y*size+size/2+6);
     });
 }
 
@@ -264,3 +281,4 @@ init();
 
 </body>
 </html>
+
